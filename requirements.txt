@@ -4,5 +4,7 @@ seaborn
 matplotlib
 scikit-learn
 datetime 
+Flask
+dill
 
 -e .
