@@ -10,6 +10,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import r2_score
+from sklearn.metrics import accuracy_score
 
 from src.exception import CustomException
 from src.logger import logging
@@ -36,7 +37,7 @@ class ModelTrainer:
             )
             models = {
 
-                "LogisticRegression": LogisticRegression(),
+                
                 "Suport Vector Machine":svm.SVC(),
                 "KNN":KNeighborsClassifier(),
                 "Decision Tree": DecisionTreeClassifier(),
@@ -59,10 +60,11 @@ class ModelTrainer:
                 list(model_report.values()).index(best_model_score)
             ]
             best_model = models[best_model_name]
-
+            
             if best_model_score<0.6:
                 raise CustomException("No best model found")
             logging.info(f"Best found model on both training and testing dataset")
+
 
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,
@@ -71,12 +73,10 @@ class ModelTrainer:
 
             predicted=best_model.predict(X_test)
 
-            r2_square = r2_score(y_test, predicted)
-            return r2_square
+            accuracy_score1 = accuracy_score(y_test, predicted)
             
-
-
-
-            
+            print("Best Model:", best_model_name)
+            return accuracy_score1
+        
         except Exception as e:
             raise CustomException(e,sys)
