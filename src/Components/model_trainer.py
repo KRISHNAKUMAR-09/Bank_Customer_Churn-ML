@@ -2,14 +2,10 @@ import os
 import sys
 from dataclasses import dataclass
 
-
-
-from sklearn.linear_model import LogisticRegression
 from sklearn import svm
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import r2_score
 from sklearn.metrics import accuracy_score
 
 from src.exception import CustomException
